@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { BuildingsService } from '../buildings/buildings.service';
 import { Building } from '../buildings/building.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AlertService } from '../alert/alert.service'
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -16,7 +17,8 @@ export class CommentComponent implements OnInit {
   comment: BComment;
   building: Building;
   commendForm: FormGroup;
-  constructor(private bs: BuildingsService) {
+  constructor(private bs: BuildingsService,
+              private alertService: AlertService) {
     this.email =   firebase.auth().currentUser.email;
     this.text = '';
     this.comment = new BComment(this.email, this.text);
@@ -38,6 +40,7 @@ export class CommentComponent implements OnInit {
               'userEmail': this.email ,
               };
     this.building.comments.push(c);
+    this.alertService.success('Successfully added a comment!');
     this.bs.updateBuilding(this.idBuilding, this.building);
   }
 
