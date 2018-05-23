@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-xs-12">
+    <img
+      [src]="building.imagePath"
+      alt="{{ building.name }}"
+      class="img-responsive"
+      style="max-height: 300px;">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{ building.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div
+      class="btn-group"
+      appDropdown>
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle">
+        Manage Bulding <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
+        <li><a style="cursor: pointer;" (click)="onEditRecipe()">Edit Bulding</a></li>
+        <li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Delete Bulding</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<h4>Description</h4>
+<div class="row">
+  <div class="col-xs-12">
+    {{ building.description }}
+  </div>
+</div>
+<br>
+<h4>Building blocks</h4>
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let kocka of building.kocke">
+        {{ kocka.dimenzija }} - {{ kocka.kolicina }}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <label>Have hard time building it ?</label>
+    <br>
+    <button class="btn btn-primary" (click)="jumpOut()">Get instructions from Lego gods</button>
+
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12">
+    <h4><b>Comments</b></h4>
+    <button (click)="addCommentClicked()"
+    type="button"
+    class="btn btn-primary">
+     Add Comment
+  </button>
+  <div *ngIf="flag" class="row">
+    <div class="col-xs-12">
+      <app-comment [idBuilding]="id"></app-comment>
+    </div>
+  </div>
+<br>
+<br>
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              *ngFor="let comment of building.comments">
+              <b>{{ comment.userEmail }}</b> says <br>{{ comment.text }}
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</div>

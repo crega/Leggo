@@ -1,0 +1,149 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!buildingForm.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL</label>
+            <input
+              type="text"
+              id="imagePath"
+              formControlName="imagePath"
+              class="form-control"
+              #imagePath>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              class="form-control"
+              formControlName="description"
+              rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="manualPath">Manual URL</label>
+              <input
+                [value]="buildingManualPath"
+                type="text"
+                id="manualPath"
+                formControlName="manualPath"
+                class="form-control"
+                >
+            </div>
+          </div>
+        </div>
+        <h4>Building blocks to build structure</h4>
+        <!---->
+      <div class="row">
+        <div class="col-xs-12" formArrayName="kocke">
+          <div
+            class="row"
+            *ngFor="let kockaCtrl of buildingForm.get('kocke').controls; let i = index"
+            [formGroupName]="i"
+            style="margin-top: 10px;">
+            <div class="col-xs-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="dimenzija">
+            </div>
+            <div class="col-xs-2">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="kolicina">
+            </div>
+            <div class="col-xs-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDeletekocka(i)">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="onAddkocka()">Add Blocks</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h4> Comments on this structure</h4>
+      <div class="row">
+          <div class="col-xs-12" formArrayName="comments">
+            <div
+              class="row"
+              *ngFor="let kockaCtrl of buildingForm.get('comments').controls; let i = index"
+              [formGroupName]="i"
+              style="margin-top: 10px;">
+              <div class="col-xs-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="userEmail">
+              </div>
+              <div class="col-xs-6">
+                <textarea
+                  rows="3"
+                  type="text"
+                  class="form-control"
+                  formControlName="text">
+                </textarea>
+
+              </div>
+              <div class="col-xs-2">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="onDeleteComment(i)">X</button>
+              </div>
+            </div>
+            <hr>
+
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
